@@ -1,0 +1,94 @@
+#include<stdio.h>
+
+int maxheap[50],minheap[50];
+int m = 0 , n = 0 ;
+
+
+//for max heap sorting
+void insertmax(int val)
+{
+    m++;
+    int parent , i , temp;
+    maxheap[m] = val; i = m;
+    
+    while(i>1)
+    {
+        parent = i/2 ;
+        
+        if(maxheap[i] > maxheap[parent])
+        {
+            temp = maxheap[i];
+            maxheap[i] = maxheap[parent];
+            maxheap[parent] = temp;
+            
+            i = parent;
+        }
+        else
+        {
+            break;
+        }
+        
+    }
+}
+// for min heap sorting 
+void insertmin(int val)
+{
+    n++;
+    int parent , i , temp;
+    minheap[n] = val; i = n;
+    
+    while(i>1)
+    {
+        parent = i/2 ;
+        
+        if(minheap[i] < minheap[parent])
+        {
+            temp = minheap[i];
+            minheap[i] = minheap[parent];
+            minheap[parent] = temp;
+            
+            i = parent;
+        }
+        else
+        {
+            break;
+        }
+        
+    }
+}
+void displaymax()
+{
+    printf("\n-----MAX HEAP-----\n");
+    for(int i=1;i<=m;i++)
+    {
+        printf("%d\t",maxheap[i]);
+    }
+}
+
+void displaymin()
+{
+    printf("\n-----MIN HEAP-----\n");
+    for(int i=1;i<=n;i++)
+    {
+        printf("%d\t",minheap[i]);
+    }
+}
+
+int main()
+{
+    int n , x ;
+    printf("enter the no. of element to insert : ");
+    scanf("%d",&n);
+    printf("\nenter the element to insert for both max and min heap : \n");
+    for(int i =0;i<n;i++)
+    {
+        scanf("%d",&x);
+        insertmax(x);
+        insertmin(x);
+    }
+    
+    displaymin();
+    printf("\n");
+    displaymax();
+    
+}
