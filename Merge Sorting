@@ -1,0 +1,78 @@
+// merge sorting
+#include<stdio.h>
+void merge(int a[] , int lb , int mid , int ub)
+{
+    
+    int i = lb ;
+    int j = mid+1;
+    int k = lb;
+    
+    int temp[100];
+    
+    while( i <= mid && j <= ub )
+    {
+        if(a[i] < a[j])
+        {
+            temp[k] = a[i];
+            i++;
+        }
+        else
+        {
+            temp[k] = a[j];
+            j++;
+        }
+        k++;
+    }
+    
+    if(i > mid)
+    {
+        while(j<=ub){
+        temp[k]  = a[j];
+        j++ ; k++;
+        }
+    }
+    else
+    {
+        while(i<=mid)
+        {
+            temp[k] = a[i];
+            i++;k++;
+        }
+        
+    }
+    
+    for( int i =lb ; i<=ub ;i++)
+    {
+        a[i] = temp[i];
+    }
+}
+void mergesort( int a[] , int lb , int ub)
+{
+    int mid;
+    if(lb<ub)
+    {
+        mid = (lb+ub)/2;
+        mergesort(a , lb , mid);
+        mergesort(a , mid+1 , ub);
+        merge( a , lb , mid , ub);
+    }
+}
+int main()
+{
+    int a[100], n ;
+    printf("enter the number of element : ");
+    scanf("%d",&n);
+    
+    printf("\n enter the elements : \n");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    
+    mergesort(a , 0 ,n-1);
+    printf("\n");
+    for(int i=0;i<n;i++)
+    {
+        printf("%d\t",a[i]);
+    }
+}
