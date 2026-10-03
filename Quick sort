@@ -1,0 +1,62 @@
+#include<stdio.h>
+
+void swap( int *a , int *b)
+{
+    int temp ;
+    temp = *a ;
+    *a = *b ;
+    *b = temp ;
+}
+int partition(int a[] , int lb ,int ub)
+{
+    int i = lb ;
+    
+    int pivot = a[lb] ; 
+    
+    for(int j = lb+1; j<=ub ;j++)
+    {
+        if( pivot >= a[j])
+        {
+            i++ ;
+            swap(&a[i] ,&a[j]);
+        }
+    }
+    swap(&a[lb] , &a[i]) ;
+    return i ; 
+}
+
+void quicksort(int a[] , int lb ,int ub)
+{
+    if(lb < ub){
+    int k = partition(a,lb,ub) ;
+    quicksort(a , lb , k) ;
+    quicksort( a, k+1 ,ub);
+    }
+}
+void display(int a[] , int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        printf("%d\t",a[i]);
+    }
+    printf("\n");
+}
+int main()
+{
+    int n , a[100];
+    printf("enter th no. of elements : ");
+    scanf("%d",&n);
+    
+    printf("Enter the elements : ");
+    for(int i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    
+    display(a,n) ;
+    
+    quicksort(a,0,n-1) ;
+    
+    display(a,n);
+    
+}
